@@ -1,0 +1,107 @@
+<!-- stock_analysis/templates/stock_analysis/analysis.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px; /* Set a max width for larger screens */
+            margin: 0 auto; /* Center the container */
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        img {
+            width: 100%; /* Make the image take full width */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px;
+        }
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .card {
+            flex: 1; /* Allow cards to grow and fill the space */
+            margin: 10px; /* Space between cards */
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-width: 250px; /* Ensure a minimum width for smaller screens */
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        a {
+            text-decoration: none;
+            background-color: #007BFF; /* Bootstrap primary color */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Stock Recommender</h2>
+        <img src="data:image/png;base64,{{ data }}" alt="Stock Analysis Plot"/>
+
+        <!-- Displaying signals and analysis results in individual cards -->
+        <div class="info">
+            <div class="card">
+                <p>Recommendation: <strong>{{ final_check }}</strong></p>
+            </div>
+        </div>
+        <div class="info">
+            <div class="card">
+                <p>Time to buy: <strong>{{ buy_signal }}</strong></p>
+            </div>
+            <div class="card">
+                <p>Performance: <strong>{{ well_performing }}</strong></p>
+            </div>
+            <div class="card">
+                <p>Parallel Channel: <strong>{{ parallel_channel }}</strong></p>
+            </div>
+        </div>
+
+        <!-- Displaying signals and analysis results in individual cards -->
+        <div class="info">
+            <div class="card">
+                <p>Price from support: <strong>${{ distance }}</strong></p>
+            </div>
+            <div class="card">
+                <p>Slope of Support Line: <strong>{{ slope_in_degrees }}°</strong></p>
+            </div>
+            <div class="card">
+                <p>Support Line Value: <strong>${{ latest_support_line_value }}</strong></p>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+            <a href="{% url 'stock_analysis' %}">Analyze Another Stock</a>
+        </div>
+    </div>
+</body>
+</html>
